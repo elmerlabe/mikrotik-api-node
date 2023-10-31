@@ -1,0 +1,52 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Mugiwara Wifi - Login</title>
+    <link rel="icon" type="image/x-icon" href="mgw.ico" />
+    <link rel="stylesheet" href="./css/bootstrap.min.css" />
+    <script src="./js/jquery.min.js"></script>
+    <script src="./js/bootstrap.min.js"></script>
+    <script src="./asset/js/login.js"></script>
+  </head>
+  <body class="bg-info">
+    <div class="container">
+      <div class="row">
+        <div class="col-lg-5 col-md-8 mx-auto text-center">
+          <form
+            method="post"
+            action="/login"
+            class="shadow rounded-3 bg-white p-4 mt-5 mb-5"
+          >
+            <img class="mb-5" src="/asset/mgw-logo.png" width="300" />
+            <div class="mb-2">
+              <input
+                placeholder="username"
+                type="text"
+                id="username"
+                name="username"
+                class="form-control"
+              />
+            </div>
+            <div class="mb-3">
+              <input
+                placeholder="password"
+                type="password"
+                id="password"
+                name="password"
+                class="form-control"
+              />
+            </div>
+            <% if (message) { %>
+            <p class="text-danger text-start">* <%= message %></p>
+            <% }%>
+            <div class="d-grid">
+              <button type="submit" class="btn btn-secondary">Login</button>
+            </div>
+          </form>
+        </div>
+      </div>
+    </div>
+  </body>
+</html>

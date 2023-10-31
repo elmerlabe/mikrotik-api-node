@@ -1,0 +1,165 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Mugiwara Wifi - <%= page %></title>
+    <link rel="icon" type="image/x-icon" href="mgw.ico" />
+    <link rel="stylesheet" href="./css/bootstrap.min.css" />
+    <link rel="stylesheet" href="./asset/css/style.css" />
+
+    <script src="./js/jquery.min.js"></script>
+    <script src="./js/bootstrap.min.js"></script>
+  </head>
+  <body>
+    <main class="d-flex">
+      <div
+        class="sidebar d-flex flex-column flex-shrink-0 p-3 text-white bg-dark"
+        style="width: 280px; height: 100vh"
+      >
+        <a
+          href="/"
+          class="d-flex align-items-center mb-3 mb-md-0 me-md-auto text-white text-decoration-none"
+        >
+          <span class="fs-4">Mugiwara Wifi</span>
+        </a>
+        <hr />
+        <ul class="nav nav-pills flex-column mb-auto">
+          <li class="nav-item">
+            <a
+              href="/dashboard"
+              class="<%= page == 'dashboard' ? 'nav-link text-white d-flex align-items-center active' : 'nav-link text-white d-flex align-items-center' %>"
+            >
+              <svg
+                class="sideBarSvg me-2"
+                xmlns="http://www.w3.org/2000/svg"
+                height="24"
+                viewBox="0 -960 960 960"
+                width="24"
+              >
+                <path
+                  d="M418-340q24 24 62 23.5t56-27.5l224-336-336 224q-27 18-28.5 55t22.5 61Zm62-460q59 0 113.5 16.5T696-734l-76 48q-33-17-68.5-25.5T480-720q-133 0-226.5 93.5T160-400q0 42 11.5 83t32.5 77h552q23-38 33.5-79t10.5-85q0-36-8.5-70T766-540l48-76q30 47 47.5 100T880-406q1 57-13 109t-41 99q-11 18-30 28t-40 10H204q-21 0-40-10t-30-28q-26-45-40-95.5T80-400q0-83 31.5-155.5t86-127Q252-737 325-768.5T480-800Zm7 313Z"
+                />
+              </svg>
+              Dashboard
+            </a>
+          </li>
+          <li>
+            <a
+              href="/hotspot"
+              class="<%= page == 'hotspot' ? 'nav-link text-white d-flex align-items-center active' : 'nav-link text-white d-flex align-items-center' %>"
+            >
+              <svg
+                class="sideBarSvg me-2"
+                xmlns="http://www.w3.org/2000/svg"
+                height="24"
+                viewBox="0 -960 960 960"
+                width="24"
+              >
+                <path
+                  d="M480-120q-42 0-71-29t-29-71q0-42 29-71t71-29q42 0 71 29t29 71q0 42-29 71t-71 29ZM254-346l-84-86q59-59 138.5-93.5T480-560q92 0 171.5 35T790-430l-84 84q-44-44-102-69t-124-25q-66 0-124 25t-102 69ZM84-516 0-600q92-94 215-147t265-53q142 0 265 53t215 147l-84 84q-77-77-178.5-120.5T480-680q-116 0-217.5 43.5T84-516Z"
+                />
+              </svg>
+              Hotspot
+            </a>
+          </li>
+          <li>
+            <a
+              href="/pppoe"
+              class="<%= page == 'pppoe' ? 'nav-link text-white d-flex align-items-center active' : 'nav-link text-white d-flex align-items-center' %>"
+            >
+              <svg
+                class="sideBarSvg me-2"
+                xmlns="http://www.w3.org/2000/svg"
+                height="24"
+                viewBox="0 -960 960 960"
+                width="24"
+              >
+                <path
+                  d="M0-240v-63q0-43 44-70t116-27q13 0 25 .5t23 2.5q-14 21-21 44t-7 48v65H0Zm240 0v-65q0-32 17.5-58.5T307-410q32-20 76.5-30t96.5-10q53 0 97.5 10t76.5 30q32 20 49 46.5t17 58.5v65H240Zm540 0v-65q0-26-6.5-49T754-397q11-2 22.5-2.5t23.5-.5q72 0 116 26.5t44 70.5v63H780Zm-455-80h311q-10-20-55.5-35T480-370q-55 0-100.5 15T325-320ZM160-440q-33 0-56.5-23.5T80-520q0-34 23.5-57t56.5-23q34 0 57 23t23 57q0 33-23 56.5T160-440Zm640 0q-33 0-56.5-23.5T720-520q0-34 23.5-57t56.5-23q34 0 57 23t23 57q0 33-23 56.5T800-440Zm-320-40q-50 0-85-35t-35-85q0-51 35-85.5t85-34.5q51 0 85.5 34.5T600-600q0 50-34.5 85T480-480Zm0-80q17 0 28.5-11.5T520-600q0-17-11.5-28.5T480-640q-17 0-28.5 11.5T440-600q0 17 11.5 28.5T480-560Zm1 240Zm-1-280Z"
+                />
+              </svg>
+              PPPoE
+            </a>
+          </li>
+          <li>
+            <a
+              href="/report"
+              class="<%= page == 'report' ? 'nav-link text-white d-flex align-items-center active' : 'nav-link text-white d-flex align-items-center' %>"
+            >
+              <svg
+                class="sideBarSvg me-2"
+                xmlns="http://www.w3.org/2000/svg"
+                height="24"
+                viewBox="0 -960 960 960"
+                width="24"
+              >
+                <path
+                  d="M560-440q-50 0-85-35t-35-85q0-50 35-85t85-35q50 0 85 35t35 85q0 50-35 85t-85 35ZM280-320q-33 0-56.5-23.5T200-400v-320q0-33 23.5-56.5T280-800h560q33 0 56.5 23.5T920-720v320q0 33-23.5 56.5T840-320H280Zm80-80h400q0-33 23.5-56.5T840-480v-160q-33 0-56.5-23.5T760-720H360q0 33-23.5 56.5T280-640v160q33 0 56.5 23.5T360-400Zm440 240H120q-33 0-56.5-23.5T40-240v-440h80v440h680v80ZM280-400v-320 320Z"
+                />
+              </svg>
+              Report
+            </a>
+          </li>
+          <hr />
+          <li>
+            <a
+              href="/logout"
+              class="nav-link text-white d-flex align-items-center"
+              aria-current="page"
+            >
+              <svg
+                class="sideBarSvg me-2"
+                xmlns="http://www.w3.org/2000/svg"
+                height="24"
+                viewBox="0 -960 960 960"
+                width="24"
+              >
+                <path
+                  d="M200-120q-33 0-56.5-23.5T120-200v-560q0-33 23.5-56.5T200-840h280v80H200v560h280v80H200Zm440-160-55-58 102-102H360v-80h327L585-622l55-58 200 200-200 200Z"
+                />
+              </svg>
+              Logout
+            </a>
+          </li>
+        </ul>
+      </div>
+      <div class="w-100">
+        <nav class="topnav navbar navbar-expand-lg bg-dark">
+          <div class="container-fluid">
+            <a class="navbar-brand text-light" href="/">Mugiwara Wifi</a>
+            <button
+              class="navbar-toggler border-light bg-secondary-subtle"
+              type="button"
+              data-bs-toggle="collapse"
+              data-bs-target="#navbarNavAltMarkup"
+              aria-controls="navbarNavAltMarkup"
+              aria-expanded="false"
+              aria-label="Toggle navigation"
+            >
+              <span class="navbar-toggler-icon"></span>
+            </button>
+            <div class="collapse navbar-collapse" id="navbarNavAltMarkup">
+              <div class="navbar-nav">
+                <a class="nav-link text-light" href="#">Dashboard</a>
+                <a
+                  class="nav-link text-light active"
+                  href="/"
+                  aria-current="page"
+                  >Report</a
+                >
+                <a class="nav-link text-light" href="/logout">Logout</a>
+              </div>
+            </div>
+          </div>
+        </nav>
+        <div class="container p-3 px-4">
+          <% if (page == 'dashboard') { %> <%- include('dashboard'); -%> <% }
+          else if (page == 'hotspot') { %> <%- include('hotspot'); -%> <% } else
+          if (page == 'pppoe') { %> <%- include('pppoe'); -%> <% } else if (page
+          == 'report') { %> <%- include('report'); -%> <% }%>
+        </div>
+      </div>
+    </main>
+  </body>
+</html>
