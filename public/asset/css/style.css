@@ -16,6 +16,18 @@ body {
     filter:invert();
 }
 
+hr {
+    opacity: 100%;
+}
+
+.rounded-full {
+    border-radius: 50%;
+}
+
+.hidden {
+    display: none!important;
+}
+
 @media only screen and (max-width: 768px) {
     .sidebar {
         display: none!important;

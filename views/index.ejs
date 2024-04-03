@@ -11,17 +11,27 @@
     <script src="./js/jquery.min.js"></script>
     <script src="./js/bootstrap.min.js"></script>
   </head>
-  <body>
+  <body class="bg-light">
     <main class="d-flex">
       <div
-        class="sidebar d-flex flex-column flex-shrink-0 p-3 text-white bg-dark"
-        style="width: 280px; height: 100vh"
+        class="fixed sidebar d-flex flex-column flex-shrink-0 p-3 text-white bg-dark"
+        style="width: 280px; min-height: 100vh"
       >
         <a
           href="/"
-          class="d-flex align-items-center mb-3 mb-md-0 me-md-auto text-white text-decoration-none"
+          class="d-flex align-items-center px-2 mb-3 mb-md-0 me-md-auto text-white text-decoration-none rounded"
         >
-          <span class="fs-4">Mugiwara Wifi</span>
+          <img
+            src="asset/mgw-logo.png"
+            width="40"
+            class="me-2 mt-1 rounded-full bg-light"
+          />
+          <div>
+            <span class="fs-5">MUGIWARA WIFI</span>
+            <small style="margin-top: -3px; letter-spacing: 2px" class="d-block"
+              >CONNECT EVERYWHERE</small
+            >
+          </div>
         </a>
         <hr />
         <ul class="nav nav-pills flex-column mb-auto">
@@ -141,13 +151,15 @@
             </button>
             <div class="collapse navbar-collapse" id="navbarNavAltMarkup">
               <div class="navbar-nav">
-                <a class="nav-link text-light" href="#">Dashboard</a>
+                <a class="nav-link text-light" href="/dashboard">Dashboard</a>
                 <a
                   class="nav-link text-light active"
-                  href="/"
+                  href="/hotspot"
                   aria-current="page"
-                  >Report</a
+                  >Hotspot</a
                 >
+                <a class="nav-link text-light" href="/pppoe">PPPoE</a>
+                <a class="nav-link text-light" href="/report">Report</a>
                 <a class="nav-link text-light" href="/logout">Logout</a>
               </div>
             </div>
