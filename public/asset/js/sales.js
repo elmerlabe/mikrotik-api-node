@@ -1,10 +1,16 @@
 const dateNow = new Date();
+const profiles = ['3HRS', '1day', '1week', '1month'];
 let salesData = [];
 let paginatedData = [];
 let page = 1;
 let perPage = 20;
 let totalPage = 0;
 let totalAmount = 0;
+let profile3HrsSales = 0;
+let profile1DaySales = 0;
+let profile1WeekSales = 0;
+let profile1MonthSales = 0;
+
 let sellerSalesByPercent = 0;
 let mgwSalesByPercent = 0;
 
@@ -31,8 +37,12 @@ const filterData = () => {
     );
   });
 
+  // reset profile sales value
+  resetProfileSales();
+
   //get total amount from filtered data result
   filteredData.map((item) => {
+    setSalesToProfile(item.profile, item.amount);
     ttlAmount += Number(item.amount);
   });
 
@@ -91,10 +101,19 @@ const displaySales = () => {
     name = $('#seller').val();
   }
 
+  // per profile sales
+  $('#profile3HrsSales').html(profile3HrsSales);
+  $('#profile1DaySales').html(profile1DaySales);
+  $('#profile1WeekSales').html(profile1WeekSales);
+  $('#profile1MonthSales').html(profile1MonthSales);
+
   totalSalesElement.innerHTML = totalAmount.toLocaleString();
   sellerSalesElement.innerHTML = sellerSales;
   mgwSalesElement.innerHTML = mgwSales;
   sellerNameCard.innerHTML = name;
+  $('#salesTitle').html(
+    name == 'Seller' ? 'Sales Report' : name + ' Sales Report'
+  );
 };
 
 const prevPage = () => {
@@ -247,6 +266,32 @@ const calculateShares = () => {
   const sharePercent = Number($('#sharePercent').val());
   sellerSalesByPercent = Math.ceil(sharePercent * totalAmount);
   displaySales();
+};
+
+const setSalesToProfile = (profile, amount) => {
+  amount = Number(amount);
+
+  switch (profile) {
+    case profiles[0]: // 3HRS
+      profile3HrsSales += amount;
+      break;
+    case profiles[1]: // 1day
+      profile1DaySales += amount;
+      break;
+    case profiles[2]: // 1week
+      profile1WeekSales += amount;
+      break;
+    case profiles[3]: // 1month
+      profile1MonthSales += amount;
+      break;
+  }
+};
+
+const resetProfileSales = () => {
+  profile3HrsSales = 0;
+  profile1DaySales = 0;
+  profile1WeekSales = 0;
+  profile1MonthSales = 0;
 };
 
 // DOM interaction
