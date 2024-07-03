@@ -1,6 +1,6 @@
 const express = require('express');
 const mikronode = require('mikronode');
-const { toJsonKeyValue } = require('../../lib/helpers');
+const { toJsonKeyValue, randomString } = require('../../lib/helpers');
 const mkDevice = new mikronode(process.env.MK_IP, process.env.MK_PORT);
 
 const MK_USER = process.env.MK_USER;
@@ -8,7 +8,7 @@ const MK_PASS = process.env.MK_PASS;
 
 const router = express.Router();
 
-router.get('/users', async (req, res) => {
+router.get('/users/active', async (req, res) => {
   mkDevice
     .connect()
     .then(([login]) => {
@@ -27,6 +27,80 @@ router.get('/users', async (req, res) => {
         connection.close();
 
         return res.json(active);
+      });
+    })
+    .catch((error) => {
+      console.error(error);
+      const message = error[0].value;
+      return res.json({ success: false, message: message });
+    });
+});
+
+router.post('/users/add', async (req, res) => {
+  const {
+    qty,
+    server,
+    isUsernameOnly,
+    prefix,
+    timeLimit,
+    dataLimit,
+    profile,
+    comment,
+  } = req.body;
+
+  let name = '';
+  password = '';
+
+  mkDevice
+    .connect()
+    .then(([login]) => {
+      return login(MK_USER, MK_PASS);
+    })
+    .then((connection) => {
+      const channel = connection.openChannel();
+      //channel.sync(true);
+
+      // Iterate depends on qty
+      for (let x = 0; x < qty; x++) {
+        let code = randomString('1234567890', 5);
+
+        if (prefix) {
+          code = prefix + code;
+        }
+
+        if (!isUsernameOnly) {
+          name = code;
+          password = code;
+        } else {
+          name = code;
+        }
+
+        channel.write('/ip/hotspot/user/add', {
+          server,
+          name,
+          password,
+          'limit-uptime': timeLimit,
+          profile,
+          comment,
+        });
+      }
+
+      // If failed to add
+      channel.on('trap', (response) => {
+        // close session
+        channel.close();
+        connection.close();
+
+        const message = response.data[0].value;
+        return res.json({ success: false, message: message });
+      });
+
+      // success
+      channel.on('done', (response) => {
+        const data = response.data;
+        channel.close();
+
+        return res.json({ success: true });
       });
     })
     .catch((error) => {
