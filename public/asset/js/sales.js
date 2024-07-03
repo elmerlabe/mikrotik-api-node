@@ -181,7 +181,7 @@ const fetchSalesData = () => {
   const seller = $('#seller').val();
 
   $.ajax({
-    url: '/api/hotspot_sales',
+    url: '/api/hotspot/sales',
     type: 'post',
     data: {
       dateFrom: dateFrom,

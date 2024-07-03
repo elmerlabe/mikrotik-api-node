@@ -6,9 +6,10 @@ const path = require('path');
 const bodyParser = require('body-parser');
 const session = require('express-session');
 
-const hotspot_sales = require('./routes/api/hotspot_sales');
 const login = require('./routes/login');
 const pages = require('./routes/pages');
+const system = require('./routes/api/system');
+const hotspot = require('./routes/api/hotspot');
 
 const app = express();
 const port = process.env.PORT || 4000;
@@ -33,7 +34,8 @@ app.use(
 
 app.use(pages);
 app.use('/login', login);
-app.use('/api/hotspot_sales', hotspot_sales);
+app.use('/api/system', system);
+app.use('/api/hotspot', hotspot);
 
 app.listen(port, () => {
   console.log(`Server running at http://localhost:${port}`);
