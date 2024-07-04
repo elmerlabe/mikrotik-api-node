@@ -8,7 +8,7 @@ const MK_PASS = process.env.MK_PASS;
 
 const router = express.Router();
 
-router.get('/users/active', async (req, res) => {
+router.get('/users', async (req, res) => {
   mkDevice
     .connect()
     .then(([login]) => {
@@ -21,12 +21,12 @@ router.get('/users/active', async (req, res) => {
       channel.on('done', (response) => {
         const data = response.data;
 
-        const active = toJsonKeyValue(data);
+        const users = toJsonKeyValue(data);
 
         channel.close();
         connection.close();
 
-        return res.json(active);
+        return res.json({ users: users, count: users.length });
       });
     })
     .catch((error) => {
@@ -138,6 +138,43 @@ router.get('/active', async (req, res) => {
     });
 });
 
+router.get('/active/count', async (req, res) => {
+  mkDevice
+    .connect()
+    .then(([login]) => {
+      return login(MK_USER, MK_PASS);
+    })
+    .then((connection) => {
+      const channel = connection.openChannel('script');
+      channel.write('/ip/hotspot/active/print');
+
+      // If failed to add
+      channel.on('trap', (response) => {
+        // close session
+        channel.close();
+        connection.close();
+
+        const message = response.data[0].value;
+        return res.json({ success: false, message: message });
+      });
+
+      channel.on('done', (response) => {
+        const data = response.data;
+        const active = toJsonKeyValue(data);
+
+        channel.close();
+        connection.close();
+
+        return res.json({ count: active.length });
+      });
+    })
+    .catch((error) => {
+      console.error(error);
+      const message = error[0].value;
+      return res.json({ success: false, message: message });
+    });
+});
+
 router.post('/sales', async (req, res) => {
   const { dateFrom, dateTo } = req.body;
 
@@ -168,8 +205,10 @@ router.post('/sales', async (req, res) => {
         const data = response.data;
         let salesReport = [];
 
-        data.forEach((element) => {
-          const report = element[2].value;
+        const sales = toJsonKeyValue(data);
+
+        sales.forEach((sale) => {
+          const report = sale.name;
           const [
             date,
             time,
