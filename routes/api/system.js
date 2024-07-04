@@ -35,4 +35,31 @@ router.get('/resource', async (req, res) => {
     });
 });
 
+router.get('/clock', async (req, res) => {
+  mkDevice
+    .connect()
+    .then(([login]) => {
+      return login(MK_USER, MK_PASS);
+    })
+    .then((connection) => {
+      const channel = connection.openChannel('script');
+      channel.write('/system/clock/print');
+
+      channel.on('done', (response) => {
+        const data = response.data;
+        const clock = toJsonKeyValue(data);
+
+        channel.close();
+        connection.close();
+
+        return res.json(clock);
+      });
+    })
+    .catch((error) => {
+      console.error(error);
+      const message = error[0].value;
+      return res.json({ success: false, message: message });
+    });
+});
+
 module.exports = router;
