@@ -25,7 +25,7 @@ router.get('/resource', async (req, res) => {
         channel.close();
         connection.close();
 
-        return res.json(resource);
+        return res.json(resource[0]);
       });
     })
     .catch((error) => {
@@ -52,7 +52,34 @@ router.get('/clock', async (req, res) => {
         channel.close();
         connection.close();
 
-        return res.json(clock);
+        return res.json(clock[0]);
+      });
+    })
+    .catch((error) => {
+      console.error(error);
+      const message = error[0].value;
+      return res.json({ success: false, message: message });
+    });
+});
+
+router.get('/routerboard', async (req, res) => {
+  mkDevice
+    .connect()
+    .then(([login]) => {
+      return login(MK_USER, MK_PASS);
+    })
+    .then((connection) => {
+      const channel = connection.openChannel('script');
+      channel.write('/system/routerboard/print');
+
+      channel.on('done', (response) => {
+        const data = response.data;
+        const routerboard = toJsonKeyValue(data);
+
+        channel.close();
+        connection.close();
+
+        return res.json(routerboard[0]);
       });
     })
     .catch((error) => {
