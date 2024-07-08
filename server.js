@@ -11,6 +11,7 @@ const pages = require('./routes/pages');
 const system = require('./routes/api/system');
 const hotspot = require('./routes/api/hotspot');
 const ppp = require('./routes/api/ppp');
+const interfaces = require('./routes/api/interfaces');
 
 const app = express();
 const port = process.env.PORT || 4000;
@@ -38,6 +39,7 @@ app.use('/login', login);
 app.use('/api/system', system);
 app.use('/api/hotspot', hotspot);
 app.use('/api/ppp', ppp);
+app.use('/api/interfaces', interfaces);
 
 app.listen(port, () => {
   console.log(`Server running at http://localhost:${port}`);
