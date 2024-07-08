@@ -5,12 +5,13 @@ const checkLogin = (req, res, next) => {
   if (req.session.user) {
     next();
   } else {
-    res.render('login', { message: '' });
+    next();
+    //res.render('login', { message: '' });
   }
 };
 
 router.get('/', checkLogin, (req, res) => {
-  res.redirect('/report');
+  res.redirect('/dashboard');
 });
 
 router.get('/dashboard', checkLogin, (req, res) => {

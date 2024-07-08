@@ -1,1 +1,319 @@
-<h4>Dashboard</h4>
+<h4 class="hidden">Dashboard</h4>
+<div class="row">
+  <div class="col-md-12">
+    <div class="d-flex justify-content-end">
+      <p id="mtDate" class="me-1 text-capitalize">--</p>
+      <p id="mtTime" class="me-1">--</p>
+    </div>
+  </div>
+</div>
+<div class="row mb-3">
+  <div class="bg-white col-md-4 p-3 border border-1 rounded-start">
+    <div class="d-flex align-items-center">
+      <svg
+        width="40"
+        height="40"
+        xmlns="http://www.w3.org/2000/svg"
+        fill="none"
+        viewBox="0 0 24 24"
+        stroke-width="1.5"
+        stroke="currentColor"
+        class="size-6"
+      >
+        <path
+          stroke-linecap="round"
+          stroke-linejoin="round"
+          d="M8.288 15.038a5.25 5.25 0 0 1 7.424 0M5.106 11.856c3.807-3.808 9.98-3.808 13.788 0M1.924 8.674c5.565-5.565 14.587-5.565 20.152 0M12.53 18.22l-.53.53-.53-.53a.75.75 0 0 1 1.06 0Z"
+        />
+      </svg>
+      <div class="ms-4">
+        <p class="m-0">Hotspot Active</p>
+        <h2 class="m-0" id="mtHsActive">0</h2>
+      </div>
+    </div>
+  </div>
+
+  <div class="bg-white col-md-4 p-3 border border-start-0 border-1">
+    <div class="d-flex align-items-center">
+      <svg
+        width="40"
+        height="40"
+        xmlns="http://www.w3.org/2000/svg"
+        fill="none"
+        viewBox="0 0 24 24"
+        stroke-width="1.5"
+        stroke="currentColor"
+        class="size-6"
+      >
+        <path
+          stroke-linecap="round"
+          stroke-linejoin="round"
+          d="M18 18.72a9.094 9.094 0 0 0 3.741-.479 3 3 0 0 0-4.682-2.72m.94 3.198.001.031c0 .225-.012.447-.037.666A11.944 11.944 0 0 1 12 21c-2.17 0-4.207-.576-5.963-1.584A6.062 6.062 0 0 1 6 18.719m12 0a5.971 5.971 0 0 0-.941-3.197m0 0A5.995 5.995 0 0 0 12 12.75a5.995 5.995 0 0 0-5.058 2.772m0 0a3 3 0 0 0-4.681 2.72 8.986 8.986 0 0 0 3.74.477m.94-3.197a5.971 5.971 0 0 0-.94 3.197M15 6.75a3 3 0 1 1-6 0 3 3 0 0 1 6 0Zm6 3a2.25 2.25 0 1 1-4.5 0 2.25 2.25 0 0 1 4.5 0Zm-13.5 0a2.25 2.25 0 1 1-4.5 0 2.25 2.25 0 0 1 4.5 0Z"
+        />
+      </svg>
+
+      <div class="ms-4">
+        <p class="m-0">PPPoE Active</p>
+        <h2 class="m-0" id="mtPppActive">0</h2>
+      </div>
+    </div>
+  </div>
+
+  <div class="bg-white col-md-4 p-3 border border-start-0 border-1 rounded-end">
+    <div class="d-flex align-items-center">
+      <svg
+        width="40"
+        height="40"
+        xmlns="http://www.w3.org/2000/svg"
+        viewBox="0 0 576 512"
+      >
+        <!--!Font Awesome Free 6.5.2 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license/free Copyright 2024 Fonticons, Inc.-->
+        <path
+          d="M112 112c0 35.3-28.7 64-64 64V336c35.3 0 64 28.7 64 64H464c0-35.3 28.7-64 64-64V176c-35.3 0-64-28.7-64-64H112zM0 128C0 92.7 28.7 64 64 64H512c35.3 0 64 28.7 64 64V384c0 35.3-28.7 64-64 64H64c-35.3 0-64-28.7-64-64V128zM176 256a112 112 0 1 1 224 0 112 112 0 1 1 -224 0zm80-48c0 8.8 7.2 16 16 16v64h-8c-8.8 0-16 7.2-16 16s7.2 16 16 16h24 24c8.8 0 16-7.2 16-16s-7.2-16-16-16h-8V208c0-8.8-7.2-16-16-16H272c-8.8 0-16 7.2-16 16z"
+        />
+      </svg>
+
+      <div class="ms-4">
+        <p class="m-0">Hotspot Sales</p>
+        <p class="m-0">Today: <span class="fw-bold">P0</span></p>
+        <p class="m-0">This month: <span class="fw-bold">P0</span></p>
+      </div>
+    </div>
+  </div>
+</div>
+
+<div class="row mb-3">
+  <div class="bg-white col-md-4 py-1 border border-1 rounded-start">
+    <div class="py-2 d-inline-flex align-items-center">
+      <svg
+        width="25"
+        height="25"
+        xmlns="http://www.w3.org/2000/svg"
+        fill="none"
+        viewBox="0 0 24 24"
+        stroke-width="1.5"
+        stroke="currentColor"
+        class="size-6"
+      >
+        <path
+          stroke-linecap="round"
+          stroke-linejoin="round"
+          d="M8.25 3v1.5M4.5 8.25H3m18 0h-1.5M4.5 12H3m18 0h-1.5m-15 3.75H3m18 0h-1.5M8.25 19.5V21M12 3v1.5m0 15V21m3.75-18v1.5m0 15V21m-9-1.5h10.5a2.25 2.25 0 0 0 2.25-2.25V6.75a2.25 2.25 0 0 0-2.25-2.25H6.75A2.25 2.25 0 0 0 4.5 6.75v10.5a2.25 2.25 0 0 0 2.25 2.25Zm.75-12h9v9h-9v-9Z"
+        />
+      </svg>
+      <p class="ms-2 my-auto fw-bolder">Resources</p>
+    </div>
+    <div class="d-flex">
+      <div class="d-flex flex-column">
+        <p class="my-auto me-4 mb-2">CPU Load</p>
+        <p class="my-auto me-4 mb-2">Memory</p>
+        <p class="my-auto me-4 mb-2">HDD</p>
+        <p class="my-auto me-4 mb-2">Temp</p>
+      </div>
+      <div class="d-flex flex-column flex-fill">
+        <div
+          class="progress flex-fill mb-2"
+          style="background-color: #dadada"
+          role="progressbar"
+          aria-label="Example with label"
+          aria-valuenow="0"
+          aria-valuemin="0"
+          aria-valuemax="100"
+        >
+          <div
+            id="cpuBar"
+            class="progress-bar bg-info overflow-visible text-white"
+            style="width: 0%"
+          >
+            <p class="ms-3 text-start my-auto" id="mtCpu">--</p>
+          </div>
+        </div>
+        <div
+          class="progress flex-fill mb-2"
+          style="background-color: #dadada"
+          role="progressbar"
+          aria-label="Example with label"
+          aria-valuenow="0"
+          aria-valuemin="0"
+          aria-valuemax="100"
+        >
+          <div
+            id="memBar"
+            class="progress-bar bg-info overflow-visible text-white"
+            style="width: 0%"
+          >
+            <p class="ms-3 text-start my-auto" id="mtFreeMem">--</p>
+          </div>
+        </div>
+        <div
+          class="progress flex-fill mb-2"
+          style="background-color: #dadada"
+          role="progressbar"
+          aria-label="Example with label"
+          aria-valuenow="0"
+          aria-valuemin="0"
+          aria-valuemax="100"
+        >
+          <div
+            id="hddBar"
+            class="progress-bar bg-info overflow-visible text-white"
+            style="width: 0%"
+          >
+            <p class="ms-3 text-start my-auto" id="mtFreeHdd">--</p>
+          </div>
+        </div>
+        <div
+          class="progress flex-fill mb-2"
+          style="background-color: #dadada"
+          role="progressbar"
+          aria-label="Example with label"
+          aria-valuenow="0"
+          aria-valuemin="0"
+          aria-valuemax="100"
+        >
+          <div
+            id="tempBar"
+            class="progress-bar bg-info overflow-visible text-white"
+            style="width: 0%"
+          >
+            <p class="ms-3 text-start my-auto" id="mtTemp">--</p>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <div class="bg-white col-md-4 py-1 border border-start-0 border-1">
+    <div class="py-2 d-inline-flex align-items-center">
+      <svg
+        width="25"
+        height="25"
+        xmlns="http://www.w3.org/2000/svg"
+        fill="none"
+        viewBox="0 0 24 24"
+        stroke-width="1.5"
+        stroke="currentColor"
+        class="size-6"
+      >
+        <path
+          stroke-linecap="round"
+          stroke-linejoin="round"
+          d="m11.25 11.25.041-.02a.75.75 0 0 1 1.063.852l-.708 2.836a.75.75 0 0 0 1.063.853l.041-.021M21 12a9 9 0 1 1-18 0 9 9 0 0 1 18 0Zm-9-3.75h.008v.008H12V8.25Z"
+        />
+      </svg>
+
+      <p class="ms-2 my-auto fw-bolder">System Info</p>
+    </div>
+    <div class="d-flex">
+      <div class="d-flex flex-column">
+        <p class="my-auto me-4 mb-2">Uptime</p>
+        <p class="my-auto me-4 mb-2">Board Name</p>
+        <p class="my-auto me-4 mb-2">Model</p>
+        <p class="my-auto me-4 mb-2">Router OS</p>
+      </div>
+      <div class="d-flex flex-column">
+        <p class="my-auto mb-2" id="mtUptime">--</p>
+        <p class="my-auto mb-2" id="mtBoard">--</p>
+        <p class="my-auto mb-2" id="mtModel">--</p>
+        <p class="my-auto mb-2" id="mtOsVer">--</p>
+      </div>
+    </div>
+  </div>
+
+  <div class="bg-white col-md-4 p-3 border border-start-0 border-1 rounded-end">
+    <div class="d-flex align-items-center"></div>
+  </div>
+</div>
+
+<div class="row mb-3">
+  <div class="bg-white col-md-8 py-1 border border-1">
+    <div class="py-2 d-inline-flex align-items-center">
+      <svg
+        width="25"
+        height="25"
+        xmlns="http://www.w3.org/2000/svg"
+        fill="none"
+        viewBox="0 0 24 24"
+        stroke-width="1.5"
+        stroke="currentColor"
+        class="size-6"
+      >
+        <path
+          stroke-linecap="round"
+          stroke-linejoin="round"
+          d="M3.75 3v11.25A2.25 2.25 0 0 0 6 16.5h2.25M3.75 3h-1.5m1.5 0h16.5m0 0h1.5m-1.5 0v11.25A2.25 2.25 0 0 1 18 16.5h-2.25m-7.5 0h7.5m-7.5 0-1 3m8.5-3 1 3m0 0 .5 1.5m-.5-1.5h-9.5m0 0-.5 1.5m.75-9 3-3 2.148 2.148A12.061 12.061 0 0 1 16.5 7.605"
+        />
+      </svg>
+      <p class="ms-2 my-auto fw-bolder">Traffic</p>
+    </div>
+    <p class="text-center fw-bolder">Interface ether1-ISP</p>
+    <canvas id="trafficChart" style="width: 100%; height: 250px"></canvas>
+  </div>
+  <div class="bg-white col-md-4 py-1 border border-start-0">
+    <div class="py-2 d-inline-flex align-items-center">
+      <svg
+        width="25"
+        height="25"
+        xmlns="http://www.w3.org/2000/svg"
+        fill="none"
+        viewBox="0 0 24 24"
+        stroke-width="1.5"
+        stroke="currentColor"
+        class="size-6"
+      >
+        <path
+          stroke-linecap="round"
+          stroke-linejoin="round"
+          d="M8.25 6.75h12M8.25 12h12m-12 5.25h12M3.75 6.75h.007v.008H3.75V6.75Zm.375 0a.375.375 0 1 1-.75 0 .375.375 0 0 1 .75 0ZM3.75 12h.007v.008H3.75V12Zm.375 0a.375.375 0 1 1-.75 0 .375.375 0 0 1 .75 0Zm-.375 5.25h.007v.008H3.75v-.008Zm.375 0a.375.375 0 1 1-.75 0 .375.375 0 0 1 .75 0Z"
+        />
+      </svg>
+
+      <p class="ms-2 my-auto fw-bolder">Logs</p>
+    </div>
+    <div class="table-responsive">
+      <table class="table">
+        <thead>
+          <tr>
+            <th scope="col">Time</th>
+            <th scope="col">Users</th>
+            <th scope="col">Message</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr>
+            <th scope="row">1</th>
+            <td>Mark</td>
+            <td>Otto</td>
+          </tr>
+          <tr>
+            <th scope="row">2</th>
+            <td>Jacob</td>
+            <td>Thornton</td>
+          </tr>
+          <tr>
+            <th scope="row">3</th>
+            <td colspan="2">Larry the Bird</td>
+          </tr>
+          <tr>
+            <th scope="row">2</th>
+            <td>Jacob</td>
+            <td>Thornton</td>
+          </tr>
+          <tr>
+            <th scope="row">2</th>
+            <td>Jacob</td>
+            <td>Thornton</td>
+          </tr>
+          <tr>
+            <th scope="row">2</th>
+            <td>Jacob</td>
+            <td>Thornton</td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+  </div>
+</div>
+
+<script src="./asset/js/chart.umd.min.js"></script>
+<script src="./asset/js/dashboard.js"></script>
