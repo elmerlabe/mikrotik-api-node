@@ -89,4 +89,33 @@ router.get('/routerboard', async (req, res) => {
     });
 });
 
+router.get('/health', async (req, res) => {
+  mkDevice
+    .connect()
+    .then(([login]) => {
+      return login(MK_USER, MK_PASS);
+    })
+    .then((connection) => {
+      const channel = connection.openChannel();
+      channel.write('/system/health/print');
+
+      channel.on('done', (response) => {
+        const data = response.data;
+        const health = toJsonKeyValue(data);
+
+        console.log(health);
+
+        channel.close();
+        connection.close();
+
+        return res.json(health[0]);
+      });
+    })
+    .catch((error) => {
+      console.error(error);
+      const message = error[0].value;
+      return res.json({ success: false, message: message });
+    });
+});
+
 module.exports = router;
