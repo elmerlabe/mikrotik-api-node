@@ -83,8 +83,8 @@
 </div>
 
 <div class="row mb-3">
-  <div class="bg-white col-md-4 py-1 border border-1 rounded-start">
-    <div class="py-2 d-inline-flex align-items-center">
+  <div class="bg-white col-md-4 p-3 border border-1 rounded-start">
+    <div class="py-1 d-inline-flex align-items-center">
       <svg
         width="25"
         height="25"
@@ -103,16 +103,16 @@
       </svg>
       <p class="ms-2 my-auto fw-bolder">Resources</p>
     </div>
-    <div class="d-flex">
+    <div class="d-flex p-2">
       <div class="d-flex flex-column">
-        <p class="my-auto me-4 mb-2">CPU Load</p>
-        <p class="my-auto me-4 mb-2">Memory</p>
-        <p class="my-auto me-4 mb-2">HDD</p>
-        <p class="my-auto me-4 mb-2">Temp</p>
+        <p class="my-auto me-4 mb-3">CPU Load</p>
+        <p class="my-auto me-4 mb-3">Memory</p>
+        <p class="my-auto me-4 mb-3">HDD</p>
+        <p class="my-auto me-4 mb-3">Temp</p>
       </div>
       <div class="d-flex flex-column flex-fill">
         <div
-          class="progress flex-fill mb-2"
+          class="progress flex-fill mb-3"
           style="background-color: #dadada"
           role="progressbar"
           aria-label="Example with label"
@@ -129,7 +129,7 @@
           </div>
         </div>
         <div
-          class="progress flex-fill mb-2"
+          class="progress flex-fill mb-3"
           style="background-color: #dadada"
           role="progressbar"
           aria-label="Example with label"
@@ -146,7 +146,7 @@
           </div>
         </div>
         <div
-          class="progress flex-fill mb-2"
+          class="progress flex-fill mb-3"
           style="background-color: #dadada"
           role="progressbar"
           aria-label="Example with label"
@@ -163,7 +163,7 @@
           </div>
         </div>
         <div
-          class="progress flex-fill mb-2"
+          class="progress flex-fill mb-3"
           style="background-color: #dadada"
           role="progressbar"
           aria-label="Example with label"
@@ -183,8 +183,8 @@
     </div>
   </div>
 
-  <div class="bg-white col-md-4 py-1 border border-start-0 border-1">
-    <div class="py-2 d-inline-flex align-items-center">
+  <div class="bg-white col-md-4 p-3 border border-start-0 border-1">
+    <div class="py-1 d-inline-flex align-items-center">
       <svg
         width="25"
         height="25"
@@ -204,24 +204,85 @@
 
       <p class="ms-2 my-auto fw-bolder">System Info</p>
     </div>
-    <div class="d-flex">
+    <div class="d-flex p-2">
       <div class="d-flex flex-column">
-        <p class="my-auto me-4 mb-2">Uptime</p>
-        <p class="my-auto me-4 mb-2">Board Name</p>
-        <p class="my-auto me-4 mb-2">Model</p>
-        <p class="my-auto me-4 mb-2">Router OS</p>
+        <p class="my-auto me-4 mb-3">Uptime</p>
+        <p class="my-auto me-4 mb-3">Board Name</p>
+        <p class="my-auto me-4 mb-3">Model</p>
+        <p class="my-auto me-4 mb-3">Router OS</p>
       </div>
       <div class="d-flex flex-column">
-        <p class="my-auto mb-2" id="mtUptime">--</p>
-        <p class="my-auto mb-2" id="mtBoard">--</p>
-        <p class="my-auto mb-2" id="mtModel">--</p>
-        <p class="my-auto mb-2" id="mtOsVer">--</p>
+        <p class="my-auto mb-3" id="mtUptime">--</p>
+        <p class="my-auto mb-3" id="mtBoard">--</p>
+        <p class="my-auto mb-3" id="mtModel">--</p>
+        <p class="my-auto mb-3" id="mtOsVer">--</p>
       </div>
     </div>
   </div>
 
   <div class="bg-white col-md-4 p-3 border border-start-0 border-1 rounded-end">
-    <div class="d-flex align-items-center"></div>
+    <div class="d-inline-flex align-items-center">
+      <svg
+        width="25"
+        height="25"
+        xmlns="http://www.w3.org/2000/svg"
+        fill="none"
+        viewBox="0 0 24 24"
+        stroke-width="1.5"
+        stroke="currentColor"
+        class="size-6"
+      >
+        <path
+          stroke-linecap="round"
+          stroke-linejoin="round"
+          d="M8.25 6.75h12M8.25 12h12m-12 5.25h12M3.75 6.75h.007v.008H3.75V6.75Zm.375 0a.375.375 0 1 1-.75 0 .375.375 0 0 1 .75 0ZM3.75 12h.007v.008H3.75V12Zm.375 0a.375.375 0 1 1-.75 0 .375.375 0 0 1 .75 0Zm-.375 5.25h.007v.008H3.75v-.008Zm.375 0a.375.375 0 1 1-.75 0 .375.375 0 0 1 .75 0Z"
+        />
+      </svg>
+
+      <p class="ms-2 my-auto fw-bolder">PPPoE Logs</p>
+    </div>
+    <div class="table-responsive">
+      <table class="table table-sm">
+        <thead>
+          <tr>
+            <th scope="col">Time</th>
+            <th scope="col">Users</th>
+            <th scope="col">Message</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr>
+            <th scope="row">1</th>
+            <td>Mark</td>
+            <td>Otto</td>
+          </tr>
+          <tr>
+            <th scope="row">2</th>
+            <td>Jacob</td>
+            <td>Thornton</td>
+          </tr>
+          <tr>
+            <th scope="row">3</th>
+            <td colspan="2">Larry the Bird</td>
+          </tr>
+          <tr>
+            <th scope="row">2</th>
+            <td>Jacob</td>
+            <td>Thornton</td>
+          </tr>
+          <tr>
+            <th scope="row">2</th>
+            <td>Jacob</td>
+            <td>Thornton</td>
+          </tr>
+          <tr>
+            <th scope="row">2</th>
+            <td>Jacob</td>
+            <td>Thornton</td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
   </div>
 </div>
 
@@ -247,7 +308,7 @@
       <p class="ms-2 my-auto fw-bolder">Traffic</p>
     </div>
     <p class="text-center fw-bolder">Interface ether1-ISP</p>
-    <canvas id="trafficChart" style="width: 100%; height: 250px"></canvas>
+    <canvas id="trafficChart" style="width: 100%; height: 200px"></canvas>
   </div>
   <div class="bg-white col-md-4 py-1 border border-start-0">
     <div class="py-2 d-inline-flex align-items-center">
@@ -268,10 +329,10 @@
         />
       </svg>
 
-      <p class="ms-2 my-auto fw-bolder">Logs</p>
+      <p class="ms-2 my-auto fw-bolder">Hotspot Logs</p>
     </div>
     <div class="table-responsive">
-      <table class="table">
+      <table class="table table-sm">
         <thead>
           <tr>
             <th scope="col">Time</th>
