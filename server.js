@@ -5,6 +5,7 @@ const cors = require('cors');
 const path = require('path');
 const bodyParser = require('body-parser');
 const session = require('express-session');
+const cron = require('node-cron');
 
 const login = require('./routes/login');
 const pages = require('./routes/pages');
@@ -12,6 +13,7 @@ const system = require('./routes/api/system');
 const hotspot = require('./routes/api/hotspot');
 const ppp = require('./routes/api/ppp');
 const interfaces = require('./routes/api/interfaces');
+const { backupHotspotSales } = require('./scripts/backupSales');
 
 const app = express();
 const port = process.env.PORT || 4000;
@@ -44,3 +46,6 @@ app.use('/api/interfaces', interfaces);
 app.listen(port, () => {
   console.log(`Server running at http://localhost:${port}`);
 });
+
+//cron job: Back-up hotspot sales every 23:59
+cron.schedule('59 23 * * *', backupHotspotSales);
