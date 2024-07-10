@@ -103,12 +103,68 @@ router.get('/health', async (req, res) => {
         const data = response.data;
         const health = toJsonKeyValue(data);
 
-        console.log(health);
-
         channel.close();
         connection.close();
 
         return res.json(health[0]);
+      });
+    })
+    .catch((error) => {
+      console.error(error);
+      const message = error[0].value;
+      return res.json({ success: false, message: message });
+    });
+});
+
+router.get('/logs/hotspot', async (req, res) => {
+  mkDevice
+    .connect()
+    .then(([login]) => {
+      return login(MK_USER, MK_PASS);
+    })
+    .then((connection) => {
+      const channel = connection.openChannel();
+      channel.write('/log/print', ['?topics=hotspot,info,debug']);
+
+      channel.on('done', (response) => {
+        const data = response.data;
+        const logs = toJsonKeyValue(data);
+
+        channel.close();
+        connection.close();
+
+        console.log(logs.length);
+
+        return res.json(logs);
+      });
+    })
+    .catch((error) => {
+      console.error(error);
+      const message = error[0].value;
+      return res.json({ success: false, message: message });
+    });
+});
+
+router.get('/logs/pppoe', async (req, res) => {
+  mkDevice
+    .connect()
+    .then(([login]) => {
+      return login(MK_USER, MK_PASS);
+    })
+    .then((connection) => {
+      const channel = connection.openChannel();
+      channel.write('/log/print', ['?topics=pppoe,ppp,info']);
+
+      channel.on('done', (response) => {
+        const data = response.data;
+        const logs = toJsonKeyValue(data);
+
+        channel.close();
+        connection.close();
+
+        console.log(logs.length);
+
+        return res.json(logs);
       });
     })
     .catch((error) => {
