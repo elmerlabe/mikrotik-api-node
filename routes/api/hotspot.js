@@ -266,7 +266,9 @@ router.post('/sales', async (req, res) => {
       });
     })
     .catch((error) => {
-      console.log(error);
+      console.error(error);
+      const message = error[0].value;
+      return res.json({ success: false, message: message });
     });
 });
 
