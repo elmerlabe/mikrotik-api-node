@@ -9,10 +9,10 @@ const MK_PASS = process.env.MK_PASS;
 const router = express.Router();
 
 router.get('/', async (req, res) => {
-  const { name } = req.query;
-  let mtParams = '';
+  const { interface } = req.query;
 
-  if (name) mtParams = `?name=${name}`;
+  if (!interface)
+    return res.json({ success: false, message: 'Missing interface param' });
 
   mkDevice
     .connect()
@@ -21,7 +21,10 @@ router.get('/', async (req, res) => {
     })
     .then((connection) => {
       const channel = connection.openChannel();
-      channel.write('/interface/print', [mtParams]);
+      channel.write('/interface/monitor-traffic', {
+        interface,
+        once: true,
+      });
 
       // If failed to add
       channel.on('trap', (response) => {
@@ -40,7 +43,7 @@ router.get('/', async (req, res) => {
         channel.close();
         connection.close();
 
-        return res.json(interfaces);
+        return res.json(interfaces[0]);
       });
     })
     .catch((error) => {
