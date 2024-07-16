@@ -1,3 +1,6 @@
+let downloadRateArr = [];
+let uploadRateArr = [];
+
 const fetchSystemResource = () => {
   $.ajax({
     url: '/api/system/resource',
@@ -126,22 +129,24 @@ const changeProgressBarColor = (element, percent) => {
 };
 
 const displayTrafficChart = () => {
-  const xValues = [1, 2, 3, 4, 5, 6, 7, 8, 9, 10];
+  let labels = [];
+  let downloadRateData = [];
+  let uploadRateDate = [];
 
-  new Chart('trafficChart', {
+  const trafficChart = new Chart('trafficChart', {
     type: 'line',
     data: {
-      labels: xValues,
+      labels: labels,
       datasets: [
         {
-          data: [5, 20, 10, 30, 50, 15, 60, 80, 90, 100],
+          data: downloadRateData,
           backgroundColor: 'rgba(255, 99, 71, 0.1)',
           borderColor: '#d95057',
           fill: true,
           label: 'Download',
         },
         {
-          data: [2, 5, 10, 2, 3, 8, 2, 13, 16, 5],
+          data: uploadRateDate,
           backgroundColor: 'rgba(86, 145, 240, 0.2)',
           borderColor: '#5d86c9',
           fill: true,
@@ -150,10 +155,63 @@ const displayTrafficChart = () => {
       ],
     },
     options: {
+      responsive: true,
       tension: 0.4,
-      legend: { display: true },
+      scales: {
+        x: {
+          display: true,
+          title: {
+            display: false,
+            text: 'Time',
+          },
+        },
+        y: {
+          display: true,
+          title: {
+            display: false,
+            text: 'Rate (Mbps)',
+          },
+          ticks: {
+            callback: (value) => {
+              return value + ' Mbps';
+            },
+          },
+        },
+      },
     },
   });
+
+  // fetch interface data every 5 seconds
+  setInterval(() => {
+    $.ajax({
+      url: '/api/interfaces?interface=ether-ISP2',
+      type: 'get',
+      success: (response) => {
+        let {
+          'rx-bits-per-second': rxBitsPerSecond,
+          'tx-bits-per-second': txBitsPerSecond,
+        } = response;
+
+        // Convert bits to Megabits (Mbps)
+        const downloadMbps = (Number(rxBitsPerSecond) / 1000000).toFixed(2);
+        const uploadMbps = (Number(txBitsPerSecond) / 1000000).toFixed(2);
+
+        const timeNow = new Date().toLocaleTimeString();
+
+        if (downloadRateData.length == 10) {
+          downloadRateData.shift();
+          uploadRateDate.shift();
+          labels.shift();
+        }
+
+        downloadRateData.push(downloadMbps);
+        uploadRateDate.push(uploadMbps);
+        labels.push(timeNow);
+
+        trafficChart.update();
+      },
+    });
+  }, 5000);
 };
 
 $(() => {
