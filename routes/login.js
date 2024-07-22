@@ -1,18 +1,14 @@
 const express = require('express');
 const router = express.Router();
+const jwt = require('jsonwebtoken');
 
 const Users = [
-  { username: 'mgwadmin', password: 'mgw2021' },
-  { username: 'elmer', password: '04261994' },
+  { id: 1, username: 'mgwadmin', password: 'mgw2021' },
+  { id: 2, username: 'elmer', password: '04261994' },
 ];
-
-router.get('/', (req, res) => {
-  res.render('login', { message: '' });
-});
 
 router.post('/', (req, res) => {
   const { username, password } = req.body;
-  let isLogin = false;
 
   if (username == '' || password == '') {
     return res.render('login', {
@@ -20,15 +16,20 @@ router.post('/', (req, res) => {
     });
   }
 
-  isLogin = Users.some((user) => {
-    return user.username == username && user.password == password;
-  });
+  const hasUser = Users.find(
+    (user) => user.username == username && user.password == password
+  );
 
-  if (isLogin) {
-    req.session.user = username;
-    res.redirect('/');
+  if (hasUser) {
+    const token = jwt.sign({ id: hasUser.id }, process.env.SECRET);
+    res.cookie('token', token, {
+      httpOnly: true,
+      secure: false,
+      maxAge: 1800000, //expires after 30mins
+    });
+    return res.redirect('/dashboard');
   } else {
-    res.render('login', { message: 'Incorrect username or password' });
+    return res.render('login', { message: 'Incorrect username or password' });
   }
 });
 

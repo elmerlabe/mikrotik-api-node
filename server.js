@@ -4,7 +4,6 @@ const express = require('express');
 const cors = require('cors');
 const path = require('path');
 const bodyParser = require('body-parser');
-const session = require('express-session');
 const cron = require('node-cron');
 
 const login = require('./routes/login');
@@ -32,9 +31,6 @@ app.set('view engine', 'ejs');
 app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({ extended: true }));
 app.use(cors());
-app.use(
-  session({ secret: 'asfxdf14', cookie: { maxAge: 3600000 }, resave: true })
-);
 
 app.use(pages);
 app.use('/login', login);

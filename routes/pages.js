@@ -1,37 +1,34 @@
 const express = require('express');
 const router = express.Router();
+const { authMiddleware } = require('../lib/authMiddleware');
 
-const checkLogin = (req, res, next) => {
-  if (req.session.user) {
-    next();
-  } else {
-    next();
-    //res.render('login', { message: '' });
-  }
-};
-
-router.get('/', checkLogin, (req, res) => {
+router.get('/login', authMiddleware, (req, res) => {
+  if (!req.user) return res.render('login', { message: '' });
   res.redirect('/dashboard');
 });
 
-router.get('/dashboard', checkLogin, (req, res) => {
+router.get('/', authMiddleware, (req, res) => {
+  res.redirect('/dashboard');
+});
+
+router.get('/dashboard', authMiddleware, (req, res) => {
   res.render('index', { page: 'dashboard' });
 });
 
-router.get('/hotspot', checkLogin, (req, res) => {
+router.get('/hotspot', authMiddleware, (req, res) => {
   res.render('index', { page: 'hotspot' });
 });
 
-router.get('/pppoe', checkLogin, (req, res) => {
+router.get('/pppoe', authMiddleware, (req, res) => {
   res.render('index', { page: 'pppoe' });
 });
 
-router.get('/report', checkLogin, (req, res) => {
+router.get('/report', authMiddleware, (req, res) => {
   res.render('index', { page: 'report' });
 });
 
 router.get('/logout', (req, res) => {
-  req.session.destroy();
+  res.clearCookie('token');
   res.redirect('/login');
 });
 
