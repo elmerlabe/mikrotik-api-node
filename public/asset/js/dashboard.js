@@ -214,9 +214,59 @@ const displayTrafficChart = () => {
   }, 5000);
 };
 
+const displayHsLogs = () => {
+  $.ajax({
+    url: '/api/system/logs/hotspot',
+    success: (response) => {
+      const logs = response.logs;
+      const limit = 10;
+      const hsBody = document.getElementById('hsLogs');
+
+      hsBody.innerHTML = '';
+
+      for (let x = 0; x < limit; x++) {
+        hsBody.innerHTML +=
+          '<tr><td>' +
+          logs[x].time +
+          '</td><td>' +
+          logs[x].message.split('->: ')[1] +
+          '</tr>';
+      }
+    },
+  });
+};
+
+const displayPppLogs = () => {
+  $.ajax({
+    url: '/api/system/logs/pppoe',
+    success: (response) => {
+      const logs = response.logs;
+      const limit = 10;
+      const hsBody = document.getElementById('pppLogs');
+
+      hsBody.innerHTML = '';
+
+      for (let x = 0; x < limit; x++) {
+        hsBody.innerHTML +=
+          '<tr><td>' +
+          logs[x].time +
+          '</td><td>' +
+          logs[x].message.split('->: ')[1] +
+          '</tr>';
+      }
+    },
+  });
+};
+
 $(() => {
   fetchSystemResource();
   fetchSystemClock();
   fetchHotspotActive();
   displayTrafficChart();
+  displayHsLogs();
+  displayPppLogs();
+
+  // Intervals
+  setInterval(displayHsLogs, 10000);
+  setInterval(displayPppLogs, 10000);
 });

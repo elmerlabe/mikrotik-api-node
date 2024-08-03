@@ -133,9 +133,11 @@ router.get('/logs/hotspot', async (req, res) => {
         channel.close();
         connection.close();
 
-        console.log(logs.length);
+        const logsWithPrefix = logs
+          .filter((log) => log.message.includes('->'))
+          .reverse();
 
-        return res.json(logs);
+        return res.json({ logs: logsWithPrefix, count: logsWithPrefix.length });
       });
     })
     .catch((error) => {
