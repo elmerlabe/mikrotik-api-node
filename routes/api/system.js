@@ -164,8 +164,6 @@ router.get('/logs/pppoe', async (req, res) => {
         channel.close();
         connection.close();
 
-        console.log(logs.length);
-
         return res.json(logs);
       });
     })
