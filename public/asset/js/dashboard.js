@@ -31,8 +31,6 @@ const fetchSystemResource = () => {
       $('#mtFreeMem').text(`${freeMemory} MiB / ${totalMemory} MiB`);
       $('#mtFreeHdd').text(`${freeHdd} MiB / ${totalHdd} MiB`);
 
-      fetchSystemBoard();
-
       // calculate progress bar %
       const cpuBar = document.getElementById('cpuBar');
       const memBar = document.getElementById('memBar');
@@ -58,9 +56,10 @@ const fetchSystemClock = () => {
     url: '/api/system/clock',
     type: 'get',
     success: (data) => {
-      const { time, date } = data;
+      const { time, date, 'time-zone-name': timeZone } = data;
+
       $('#mtTime').text(time);
-      $('#mtDate').text(date);
+      $('#mtDate').text(`${timeZone} ${date}`);
     },
   });
 };
@@ -73,8 +72,6 @@ const fetchSystemBoard = () => {
       const { model, 'board-name': boardName } = data;
       $('#mtModel').text(model);
       $('#mtBoard').text(boardName);
-
-      fetchSystemHealth();
     },
   });
 };
@@ -222,15 +219,19 @@ const displayHsLogs = () => {
       const limit = 10;
       const hsBody = document.getElementById('hsLogs');
 
+      if (!logs) return;
+
       hsBody.innerHTML = '';
 
-      for (let x = 0; x < limit; x++) {
+      for (let x = 0; x < logs.length; x++) {
         hsBody.innerHTML +=
           '<tr><td>' +
           logs[x].time +
           '</td><td>' +
           logs[x].message.split('->: ')[1] +
           '</tr>';
+
+        if (x == limit - 1) break;
       }
     },
   });
@@ -244,15 +245,19 @@ const displayPppLogs = () => {
       const limit = 10;
       const hsBody = document.getElementById('pppLogs');
 
+      if (!logs) return;
+
       hsBody.innerHTML = '';
 
-      for (let x = 0; x < limit; x++) {
+      for (let x = 0; x < logs.length; x++) {
         hsBody.innerHTML +=
           '<tr><td>' +
           logs[x].time +
           '</td><td>' +
           logs[x].message.split('->: ')[1] +
           '</tr>';
+
+        if (x == limit - 1) break;
       }
     },
   });
@@ -260,6 +265,8 @@ const displayPppLogs = () => {
 
 $(() => {
   fetchSystemResource();
+  fetchSystemBoard();
+  fetchSystemHealth();
   fetchSystemClock();
   fetchHotspotActive();
   displayTrafficChart();
