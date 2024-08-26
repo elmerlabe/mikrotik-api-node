@@ -16,7 +16,8 @@ let mgwSalesByPercent = 0;
 
 const filterData = () => {
   const prof = $('#profile').val();
-  const seller = $('#seller').val().substring(0, 1).toLocaleLowerCase();
+  const seller = $('#seller').val().toLocaleLowerCase();
+  const sellerPrefix = seller.substring(0, 1).toLocaleLowerCase();
   const search = $('#search').val().toLocaleLowerCase();
   let ttlAmount = 0;
 
@@ -29,7 +30,9 @@ const filterData = () => {
 
     return (
       (prof === '' || prof === profile) &&
-      (seller === '' || seller === cPrefix) &&
+      (sellerPrefix === '' ||
+        sellerPrefix === cPrefix ||
+        comment.includes(seller)) &&
       (search === '' ||
         search === profile ||
         comment.includes(search) ||
