@@ -27,7 +27,7 @@ const dateNow = `${
 const timeNow = `${dT.getHours()}:${dT.getMinutes()}:${dT.getSeconds()}`;
 const timeStamp = `${dateNow} ${timeNow}`;
 
-const backupHotspotSales = () => {
+const backupHotspotSales = async () => {
   // Get hotspot sales from mikrotik scripts
   mkDevice
     .connect()
@@ -102,7 +102,7 @@ const backupHotspotSales = () => {
     });
 };
 
-const backupHotspotUsers = () => {
+const backupHotspotUsers = async () => {
   mkDevice
     .connect()
     .then(([login]) => {

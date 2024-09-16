@@ -43,5 +43,14 @@ app.listen(port, () => {
   console.log(`Server running at http://localhost:${port}`);
 });
 
-cron.schedule('59 23 * * *', backupHotspotSales); //cron job: Back-up hotspot sales every 23:59
-cron.schedule('* * * * */2', backupHotspotUsers); //cron job: Back-up hotspot users every 2 days
+//cron job: Back-up hotspot sales every 23:59
+cron.schedule('59 23 * * *', async () => {
+  console.log('Running hotspot sales backup script...');
+  await backupHotspotSales();
+});
+
+//cron job: Back-up hotspot users every 2 days
+cron.schedule('* * * * */2', async () => {
+  console.log('Running hotspot users backup script...');
+  await backupHotspotUsers();
+});
