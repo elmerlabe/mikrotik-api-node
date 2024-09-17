@@ -50,7 +50,7 @@ cron.schedule('59 23 * * *', async () => {
 });
 
 //cron job: Back-up hotspot users every 2 days
-cron.schedule('* * * * */2', async () => {
+cron.schedule('0 0 */2 * *', async () => {
   console.log('Running hotspot users backup script...');
   await backupHotspotUsers();
 });
