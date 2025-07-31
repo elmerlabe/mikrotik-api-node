@@ -16,6 +16,7 @@ const { backupHotspotSales, backupHotspotUsers } = require('./scripts/backup');
 
 const app = express();
 const port = process.env.PORT || 4000;
+const sequelize = require('./sequelize');
 
 //bootstrap resources
 const bootstrap_css = './node_modules/bootstrap/dist/css';
@@ -39,8 +40,13 @@ app.use('/api/hotspot', hotspot);
 app.use('/api/ppp', ppp);
 app.use('/api/interfaces', interfaces);
 
-app.listen(port, () => {
-  console.log(`Server running at http://localhost:${port}`);
+app.listen(port, async () => {
+  try {
+    await sequelize.authenticate();
+    console.log(`Server running at http://localhost:${port}`);
+  } catch (error) {
+    console.error('Error starting server:', error);
+  }
 });
 
 //cron job: Back-up hotspot sales every 23:59

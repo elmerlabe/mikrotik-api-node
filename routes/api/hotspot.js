@@ -272,4 +272,13 @@ router.post('/sales', async (req, res) => {
     });
 });
 
+router.post('/sales/log', async (req, res) => {
+  console.log(req);
+
+  return res.json({
+    success: true,
+    message: 'This feature is not implemented yet.',
+  });
+});
+
 module.exports = router;
