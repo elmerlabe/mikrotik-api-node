@@ -1,6 +1,8 @@
 const express = require('express');
 const mikronode = require('mikronode');
 const { toJsonKeyValue, randomString } = require('../../lib/helpers');
+const { Sale } = require('../../model');
+const {Sequelize, Op} = require('sequelize')
 const mkDevice = new mikronode(process.env.MK_IP, process.env.MK_PORT);
 
 const MK_USER = process.env.MK_USER;
@@ -273,12 +275,57 @@ router.post('/sales', async (req, res) => {
 });
 
 router.post('/sales/log', async (req, res) => {
-  console.log(req);
+  const { date, time, code, ip, mac, comment, amount, profile } = req.body;
+
+  try {
+    const sale = await Sale.create({
+      date,
+      time,
+      code,
+      amount,
+      ip,
+      mac,
+      profile,
+      comment,
+    })
+    sale.save();
+
+  } catch (error) {
+    console.error('Error logging sales:', error);
+    return res.json({ success: false, message: 'Failed to log sales.' });
+  }
 
   return res.json({
     success: true,
-    message: 'This feature is not implemented yet.',
+    message: 'Sales logged successfully.',
   });
+});
+
+router.post('/sales/backup', async (req, res) => {
+  const { dateFrom, dateTo, profile, seller } = req.body;
+
+  try {
+    const dateFromObj = new Date(
+      dateFrom.split('-')[0],
+      dateFrom.split('-')[1] - 1,
+      dateFrom.split('-')[2],
+      0, 0, 0
+    );
+    const dateToObj = new Date(
+      dateTo.split('-')[0],
+      dateTo.split('-')[1] - 1,
+      dateTo.split('-')[2],
+      23, 59, 59
+    );
+
+    const sales = await Sale.findAll({where: {
+      createdAt: { [Op.between]: [dateFromObj,dateToObj]},
+    }});
+    return res.json(sales);
+  } catch (error) {
+    console.error('Error fetching sales data:', error);
+    return res.json({ success: false, message: 'Failed to fetch sales data.' });
+  } 
 });
 
 module.exports = router;

@@ -43,6 +43,7 @@ app.use('/api/interfaces', interfaces);
 app.listen(port, async () => {
   try {
     await sequelize.authenticate();
+    await sequelize.sync({alter: true});
     console.log(`Server running at http://localhost:${port}`);
   } catch (error) {
     console.error('Error starting server:', error);

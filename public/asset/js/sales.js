@@ -182,9 +182,11 @@ const fetchSalesData = () => {
   const dateTo = $('#dateTo').val();
   const profile = $('#profile').val();
   const seller = $('#seller').val();
+  const database = $('#database').val();
+  const url = database === 'mikrotik'? '/api/hotspot/sales': `/api/hotspot/sales/${database}`;
 
   $.ajax({
-    url: '/api/hotspot/sales',
+    url: url,
     type: 'post',
     data: {
       dateFrom: dateFrom,
