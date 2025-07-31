@@ -9,7 +9,7 @@ stream.write(["/login", "=name=" + user, "=password=" + password, "=response=00"
 
 //Add the script below to all hotspot user profiles onLogin script
 //Make sure to paste this at the top (line 0)
-///// Script start //////
+```
 # Send request to external API to log hotspot sales
 :local comment [ /ip hotspot user get [/ip hotspot user find where name="$user"] comment];
 :local ucode [:pic $comment 0 2];
@@ -21,4 +21,4 @@ stream.write(["/login", "=name=" + user, "=password=" + password, "=response=00"
   :local data "date=$date&time=$time&code=$user&ip=$address&mac=$mac&comment=$comment&amount=5&profile=3HRS";
   tool fetch url=$apiUrl http-method=post http-data=$data keep-result=no;
 }
-///// Script end /////
+```
