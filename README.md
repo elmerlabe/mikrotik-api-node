@@ -10,15 +10,19 @@ stream.write(["/login", "=name=" + user, "=password=" + password, "=response=00"
 //Add the script below to all hotspot user profiles onLogin script
 //Make sure to paste this at the top (line 0)
 ```
-# Send request to external API to log hotspot sales
-:local comment [ /ip hotspot user get [/ip hotspot user find where name="$user"] comment];
-:local ucode [:pic $comment 0 2];
-:if ($ucode = "vc" or $ucode = "up" or $comment = "") do={
-  :local mac $"mac-address";
-  :local time [/system clock get time ];
-  :local date [ /system clock get date ];
-  :local apiUrl "http://192.168.3.254:4000/api/hotspot/sales/log"; #change ip based on the api server address
-  :local data "date=$date&time=$time&code=$user&ip=$address&mac=$mac&comment=$comment&amount=5&profile=3HRS";
-  tool fetch url=$apiUrl http-method=post http-data=$data keep-result=no;
+# Post request to external API to log hotspot sales
+:do {
+  :local comment [ /ip hotspot user get [/ip hotspot user find where name="$user"] comment];
+  :local ucode [:pic $comment 0 2];
+  :if ($ucode = "vc" or $ucode = "up" or $comment = "") do={
+    :local mac $"mac-address";
+    :local time [/system clock get time ];
+    :local date [ /system clock get date ];
+    :local apiUrl "http://192.168.3.254:4000/api/hotspot/sales/log";
+    :local data "date=$date&time=$time&code=$user&ip=$address&mac=$mac&comment=$comment&amount=5&profile=3HRS";
+    tool fetch url=$apiUrl http-method=post http-data=$data keep-result=no;
+  }
+} on-error={
+  :log error message="Failed to log hotspot sales in API: $user";
 }
 ```
